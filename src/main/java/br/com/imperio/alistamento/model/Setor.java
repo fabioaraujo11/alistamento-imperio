@@ -29,11 +29,9 @@ public class Setor {
 	public Setor() {
 	}
 
-	public Setor(Long id, String nmSetor, Comandante comandanteSetor, List<Funcionario> funcionarios) {
-		this.id = id;
+	public Setor(String nmSetor, Comandante comandanteSetor) {
 		this.nmSetor = nmSetor;
 		this.comandanteSetor = comandanteSetor;
-		this.funcionarios = funcionarios;
 	}
 
 	public Long getId() {

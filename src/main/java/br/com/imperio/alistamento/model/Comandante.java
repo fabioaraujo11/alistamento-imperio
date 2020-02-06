@@ -25,4 +25,36 @@ public class Comandante {
 	@OneToMany(mappedBy = "comandantePelotao")
 	private List<Pelotao> pelotoes;
 
+	public Long getIdGalaxy() {
+		return idGalaxy;
+	}
+
+	public void setIdGalaxy(Long idGalaxy) {
+		this.idGalaxy = idGalaxy;
+	}
+
+	public String getNmCompleto() {
+		return nmCompleto;
+	}
+
+	public void setNmCompleto(String nmCompleto) {
+		this.nmCompleto = nmCompleto;
+	}
+
+	public List<Setor> getSetores() {
+		return setores;
+	}
+
+	public void setSetores(List<Setor> setores) {
+		this.setores = setores;
+	}
+
+	public List<Pelotao> getPelotoes() {
+		return pelotoes;
+	}
+
+	public void setPelotoes(List<Pelotao> pelotoes) {
+		this.pelotoes = pelotoes;
+	}
+
 }
