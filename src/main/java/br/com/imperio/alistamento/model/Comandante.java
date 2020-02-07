@@ -25,6 +25,14 @@ public class Comandante {
 	@OneToMany(mappedBy = "comandantePelotao")
 	private List<Pelotao> pelotoes;
 
+	public Comandante(@NotNull Long idGalaxy, @NotNull String nmCompleto) {
+		this.idGalaxy = idGalaxy;
+		this.nmCompleto = nmCompleto;
+	}
+
+	public Comandante() {
+	}
+
 	public Long getIdGalaxy() {
 		return idGalaxy;
 	}

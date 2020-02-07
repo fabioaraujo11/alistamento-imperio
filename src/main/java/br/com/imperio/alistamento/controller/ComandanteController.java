@@ -18,34 +18,30 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import br.com.imperio.alistamento.controller.dto.SetorDTO;
-import br.com.imperio.alistamento.controller.form.SetorFORM;
-import br.com.imperio.alistamento.model.Setor;
+import br.com.imperio.alistamento.controller.dto.ComandanteDTO;
+import br.com.imperio.alistamento.controller.form.ComandanteFORM;
+import br.com.imperio.alistamento.model.Comandante;
 import br.com.imperio.alistamento.repository.ComandanteRepository;
-import br.com.imperio.alistamento.repository.SetorRepository;
 
 @RestController
-@RequestMapping("/setor")
-public class SetorController {
-
-	@Autowired
-	private SetorRepository setorR;
+@RequestMapping("/comandante")
+public class ComandanteController {
 
 	@Autowired
 	private ComandanteRepository comandanteR;
 
 	@GetMapping
-	public List<SetorDTO> listAll() {
-		List<Setor> setores = setorR.findAll();
+	public List<ComandanteDTO> listAll() {
+		List<Comandante> comandantes = comandanteR.findAll();
 
-		return SetorDTO.convert(setores);
+		return ComandanteDTO.convert(comandantes);
 	}
 
 	@GetMapping("/{id}")
 	public ResponseEntity<?> listByID(@PathVariable("id") Long id) {
-		Optional<Setor> optional = setorR.findById(id);
+		Optional<Comandante> optional = comandanteR.findById(id);
 		if (optional.isPresent()) {
-			return ResponseEntity.ok(SetorDTO.convertOne(optional.get()));
+			return ResponseEntity.ok(ComandanteDTO.convertOne(optional.get()));
 		}
 
 		return ResponseEntity.notFound().build();
@@ -53,18 +49,15 @@ public class SetorController {
 
 	@PostMapping
 	@Transactional
-	public ResponseEntity<SetorDTO> save(@RequestBody SetorFORM form, UriComponentsBuilder uriBuilder) {
+	public ResponseEntity<ComandanteDTO> save(@RequestBody ComandanteFORM form, UriComponentsBuilder uriBuilder) {
 		try {
-			Setor setor = form.convert(comandanteR);
+			Comandante comandante = form.convert();
 
-			if (!setor.getComandanteSetor().equals(null)) {
-				setorR.save(setor);
+			comandanteR.save(comandante);
 
-				URI uri = uriBuilder.path("/setor/{id}").buildAndExpand(setor.getId()).toUri();
-				return ResponseEntity.created(uri).body(new SetorDTO(setor));
-			}
+			URI uri = uriBuilder.path("/comandante/{id}").buildAndExpand(comandante.getIdGalaxy()).toUri();
+			return ResponseEntity.created(uri).body(new ComandanteDTO(comandante));
 
-			return ResponseEntity.noContent().build();
 		} catch (Exception e) {
 			return ResponseEntity.badRequest().build();
 		}
@@ -73,11 +66,11 @@ public class SetorController {
 
 	@PutMapping("/{id}")
 	@Transactional
-	public ResponseEntity<SetorDTO> update(@PathVariable Long id, @RequestBody SetorFORM form) {
-		Optional<Setor> optional = setorR.findById(id);
+	public ResponseEntity<ComandanteDTO> update(@PathVariable Long id, @RequestBody ComandanteFORM form) {
+		Optional<Comandante> optional = comandanteR.findById(id);
 		if (optional.isPresent()) {
-			Setor setor = form.update(id, setorR, comandanteR);
-			return ResponseEntity.ok(new SetorDTO(setor));
+			Comandante comandante = form.update(id,comandanteR);
+			return ResponseEntity.ok(new ComandanteDTO(comandante));
 		} else {
 			return ResponseEntity.notFound().build();
 		}
@@ -87,9 +80,9 @@ public class SetorController {
 	@DeleteMapping("/{id}")
 	@Transactional
 	public ResponseEntity<?> remove(@PathVariable Long id) {
-		Optional<Setor> optional = setorR.findById(id);
+		Optional<Comandante> optional = comandanteR.findById(id);
 		if (optional.isPresent()) {
-			setorR.deleteById(id);
+			comandanteR.deleteById(id);
 			return ResponseEntity.ok().build();
 		} else {
 			return ResponseEntity.notFound().build();

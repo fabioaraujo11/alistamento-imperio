@@ -3,6 +3,7 @@ package br.com.imperio.alistamento.controller.form;
 import br.com.imperio.alistamento.model.Comandante;
 import br.com.imperio.alistamento.model.Setor;
 import br.com.imperio.alistamento.repository.ComandanteRepository;
+import br.com.imperio.alistamento.repository.SetorRepository;
 
 public class SetorFORM {
 
@@ -37,6 +38,22 @@ public class SetorFORM {
 	public Setor convert(ComandanteRepository comandanteR) {
 		Comandante comandante = comandanteR.findByNmCompleto(comandanteSetor);
 		return new Setor(nmSetor, comandante);
+
+	}
+
+	public Setor update(Long id, SetorRepository setorR, ComandanteRepository comandanteR) {
+
+		Setor setor = setorR.getOne(id);
+
+		if (this.comandanteSetor == null) {
+			setor.setNmSetor(this.nmSetor);
+		}
+
+		if (this.nmSetor == null) {
+			setor.setComandanteSetor(comandanteR.findByNmCompleto(this.comandanteSetor));
+		}
+
+		return setor;
 
 	}
 
