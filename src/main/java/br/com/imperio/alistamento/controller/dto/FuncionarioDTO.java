@@ -1,6 +1,8 @@
 package br.com.imperio.alistamento.controller.dto;
 
 import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import br.com.imperio.alistamento.model.Funcionario;
 
@@ -43,7 +45,6 @@ public class FuncionarioDTO {
 	}
 
 	public FuncionarioDTO(Funcionario funcionario) {
-		super();
 		this.idGalaxy = funcionario.getIdGalaxy();
 		this.nmCompleto = funcionario.getNmCompleto();
 		this.dtNasc = funcionario.getDtNasc();
@@ -51,6 +52,17 @@ public class FuncionarioDTO {
 		this.peso = funcionario.getPeso();
 		this.setor = funcionario.getSetor().getNmSetor();
 		this.planeta = funcionario.getPlaneta();
+	}
+
+	public FuncionarioDTO() {
+	}
+
+	public static List<FuncionarioDTO> convert(List<Funcionario> funcionarios) {
+		return funcionarios.stream().map(FuncionarioDTO::new).collect(Collectors.toList());
+	}
+
+	public static FuncionarioDTO convertOne(Funcionario func) {
+		return new FuncionarioDTO(func);
 	}
 
 }

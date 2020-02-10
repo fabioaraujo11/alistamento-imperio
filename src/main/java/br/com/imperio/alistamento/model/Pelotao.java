@@ -29,11 +29,9 @@ public class Pelotao {
 	public Pelotao() {
 	}
 
-	public Pelotao(Long id, String nmPelotao, Comandante comandantePelotao, List<Stormtrooper> stormtroopers) {
-		this.id = id;
+	public Pelotao(String nmPelotao, Comandante comandantePelotao) {
 		this.nmPelotao = nmPelotao;
 		this.comandantePelotao = comandantePelotao;
-		this.stormtroopers = stormtroopers;
 	}
 
 	public Long getId() {
