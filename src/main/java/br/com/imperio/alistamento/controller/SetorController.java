@@ -8,6 +8,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,6 +27,7 @@ import br.com.imperio.alistamento.repository.SetorRepository;
 
 @RestController
 @RequestMapping("/setor")
+@CrossOrigin("http://localhost:4200")
 public class SetorController {
 
 	@Autowired
@@ -47,7 +49,6 @@ public class SetorController {
 		if (optional.isPresent()) {
 			return ResponseEntity.ok(SetorDTO.convertOne(optional.get()));
 		}
-
 		return ResponseEntity.notFound().build();
 	}
 
@@ -59,11 +60,9 @@ public class SetorController {
 
 			if (!setor.getComandanteSetor().equals(null)) {
 				setorR.save(setor);
-
 				URI uri = uriBuilder.path("/setor/{id}").buildAndExpand(setor.getId()).toUri();
 				return ResponseEntity.created(uri).body(new SetorDTO(setor));
 			}
-
 			return ResponseEntity.noContent().build();
 		} catch (Exception e) {
 			return ResponseEntity.badRequest().build();
