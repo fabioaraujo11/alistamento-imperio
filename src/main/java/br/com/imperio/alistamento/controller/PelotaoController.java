@@ -27,7 +27,7 @@ import br.com.imperio.alistamento.repository.PelotaoRepository;
 
 @RestController
 @RequestMapping("/pelotao")
-@CrossOrigin("http://localhost:4200")
+@CrossOrigin("https://astrofabio.herokuapp.com")
 public class PelotaoController {
 
 	@Autowired

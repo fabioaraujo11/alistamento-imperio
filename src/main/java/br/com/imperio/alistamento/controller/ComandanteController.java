@@ -26,7 +26,7 @@ import br.com.imperio.alistamento.repository.ComandanteRepository;
 
 @RestController
 @RequestMapping("/comandante")
-@CrossOrigin("http://localhost:4200")
+@CrossOrigin("https://astrofabio.herokuapp.com")
 public class ComandanteController {
 
 	@Autowired

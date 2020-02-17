@@ -27,7 +27,7 @@ import br.com.imperio.alistamento.repository.SetorRepository;
 
 @RestController
 @RequestMapping("/setor")
-@CrossOrigin("http://localhost:4200")
+@CrossOrigin("https://astrofabio.herokuapp.com")
 public class SetorController {
 
 	@Autowired

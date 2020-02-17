@@ -27,7 +27,7 @@ import br.com.imperio.alistamento.repository.StormtrooperRepository;
 
 @RestController
 @RequestMapping("/stormtrooper")
-@CrossOrigin("http://localhost:4200")
+@CrossOrigin("https://astrofabio.herokuapp.com")
 public class StormtrooperController {
 
 	@Autowired
